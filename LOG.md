@@ -19,3 +19,7 @@ gets its own clean environment.
 git commit vs git push: git commit save changes locally and git push uploads local changes remotely.
 **What I will do today:**
 Terminal navigation, file operations, git workflow practice
+## Excercise:
+1. ls -la ===> -l gives list of files with long format like permissions, owner, size, dates and -a is used for list all the hidden files
+2. I ran myscript.py and the error i got because wrong filename/we are in wrong dir
+4. git diff: it is used for tracking changes in my working directory that are not staged yet(like uncommited changes since my last save)
