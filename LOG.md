@@ -23,3 +23,18 @@ Terminal navigation, file operations, git workflow practice
 1. ls -la ===> -l gives list of files with long format like permissions, owner, size, dates and -a is used for list all the hidden files
 2. I ran myscript.py and the error i got because wrong filename/we are in wrong dir
 3. git diff: it is used for tracking changes in my working directory that are not staged yet(like uncommited changes since my last save)
+
+
+
+## Day 3 — [14-08-2026]
+**Branch:** day-03/first-python
+**Predictions before running:**
+- type(5) → int
+- type(5.0) → float
+- type("5") → string
+- type(True) → boolean
+**acutal output:**
+<class 'int'>
+<class 'float'>
+<class 'str'>
+<class 'bool'>
