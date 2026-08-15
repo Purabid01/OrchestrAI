@@ -38,4 +38,38 @@ Terminal navigation, file operations, git workflow practice
 <class 'float'>
 <class 'str'>
 <class 'bool'>
-QS: why does Python use str and bool instead of string and boolean? Python uses str and bool for consistency, matching its other shortened built-in types like int and dict to reduce repetitive typing
+
+# qs: 
+why does Python use str and bool instead of string and boolean? ---> Python uses str and bool for consistency, matching its other shortened built-in types like int and dict to reduce repetitive typing
+
+
+## Day 4 - [15-08-2026]
+**Branch:** day-04/variables-and-types
+**Predictions before running:**
+# What does each line print?
+a = "5"  
+b = 3     
+print(a + a)   ---> 55 
+print(b + b)   ---> 6
+print(a * 3)   ---> 555  = = str repeatation creates "5" repeated 3 times
+print(b * 3)   ---> 9
+# qs:
+Why does a + a not give you 10?---> Because a is string var, in python using the (+) operator performs string concatenation(joining the text/string together) rather than numerical addition.
+# type conversion
+c = int(a)
+print(c + b)
+print(type(c))
+# qs:
+What does int(a) do?
+--> it converts the string to int type
+# qs:
+What does c + b print?
+--> 8
+# qs:
+What does type(c) print?
+--> <class 'int'>
+# qs: 
+print this --> print(a + b)
+what is the exact error name, and why does Python refuse to do this?
+--> Exact error = TypeError: can only concatenate str (not "int") to str
+because python blocks this because strings and integers are incompatible types, and python avoids guessing whether we want text concatenation ("53") or arithmetic addition(8)
