@@ -38,3 +38,4 @@ Terminal navigation, file operations, git workflow practice
 <class 'float'>
 <class 'str'>
 <class 'bool'>
+QS: why does Python use str and bool instead of string and boolean? Python uses str and bool for consistency, matching its other shortened built-in types like int and dict to reduce repetitive typing
