@@ -1,4 +1,4 @@
-## Day 1 — 13-08-2026
+## Day 1 — [13-08-2026]
 **Branch:** day-01/toolchain-setup
 **Commit:** b4fe472
 **What I did: Today I setup my local env like install all the dependencies like puthon, git, uv and then and create and write readme and log.md file for summary**
@@ -13,7 +13,7 @@ gets its own clean environment.
 
 
 
-## Day 2 — 14-08-2026
+## Day 2 — [14-08-2026]
 **Branch:** day-02/terminal-and-git
 **Warmup — from memory, no looking up:**
 git commit vs git push: git commit save changes locally and git push uploads local changes remotely.
@@ -73,3 +73,13 @@ print this --> print(a + b)
 what is the exact error name, and why does Python refuse to do this?
 --> Exact error = TypeError: can only concatenate str (not "int") to str
 because python blocks this because strings and integers are incompatible types, and python avoids guessing whether we want text concatenation ("53") or arithmetic addition(8)
+
+
+## Day 5 - [17-08-2026]
+**Branch:** day-05/tip-calculator
+# Why do you need to convert input() before doing math?
+Because python input() function always returns a string(str). Even if the user types numbers to perform arithmetic, Python needs the value to be numerical type like int or float.
+# What happens if you don't?
+Addition joins strings together("5"+"5" = "55"), or throws a TypeError if mixed with a number ("5"+5).
+Subtraction & Division always throw a TypeError because math is not defined for strings
+Multiplication repeats the string if multiplied by an integer("5"*3="555"), but throws a TypeError if multiplied by another string ("5" * "5").
