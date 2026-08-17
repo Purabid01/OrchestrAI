@@ -83,3 +83,23 @@ Because python input() function always returns a string(str). Even if the user t
 Addition joins strings together("5"+"5" = "55"), or throws a TypeError if mixed with a number ("5"+5).
 Subtraction & Division always throw a TypeError because math is not defined for strings
 Multiplication repeats the string if multiplied by an integer("5"*3="555"), but throws a TypeError if multiplied by another string ("5" * "5").
+# Sprint 0 Gate:
+1. What does AUTH_DISABLED do and why does it exist in the reference app?
+--> AUTH_DISABLED is an env var used or configuration flag used to turn off user authentication checks across the application.
+--> when AUTH_DISABLED is set to true or 1, the app skips mandatory sign in pages, OAuth redirects and token checks.
+--> Instead of validadting JWT token or session cookies, backend middleware typically assigns a static "mock" or "admin" user to all incoming API requests.
+--> Routes guarded by authentication middleware treat every request as authorized.
+It exists is referenced app because of fast local setup, easy E2E testing, simpler debugging. 
+2. How many databases does the reference app use and what are they for?
+--> Mainly two,  orchestrai_ops and orchestrai_config
+orchestrai_ops: stores operational data (requests, workflow state, job history)
+orchestrai_config: stores admin config (settings, policies, catalog)
+3. What is the difference between // and / in Python?
+--> / performs standard devision and always returns a floating point number. 
+--> // performs floor devision. it divides the number and rounds down to the nearest whole integer.
+4. What does f"{value:.2f}" do — break down each part?
+--> f"..." = f string prefix. Tells python to evaluate variables and expressions insdie {}.
+--> value = variable/expression. The numerical value(int/float) we want to format
+--> : = format specifier seperator. seperates the   variable name from the formatting rules that follow.
+--> .2 = Precision specifier. Controls rounding and forces 2 digits after the decimal point.
+--> f = Presentation Type = Stands for "fixed-point" notation.
