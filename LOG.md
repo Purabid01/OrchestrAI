@@ -103,3 +103,11 @@ orchestrai_config: stores admin config (settings, policies, catalog)
 --> : = format specifier seperator. seperates the   variable name from the formatting rules that follow.
 --> .2 = Precision specifier. Controls rounding and forces 2 digits after the decimal point.
 --> f = Presentation Type = Stands for "fixed-point" notation.
+
+# WARMUP
+1. what does "hello"[1:4] print and why?
+--> it prints "ell". Because python follows zero-based indexing and this is string slicing that includes start and end. Here, start at index 1, which is 'e' and end at index 4 which stops before index 4(it includes 1, 2, 3).
+so, [1:4] pulls char at index 1, 2, 3 and giving us "ell". 
+2. What does [::-1] actually mean?
+--> [start:stop:step]
+here, start empty, stop also empty, step is -1 which tells python to step backward thorugh the string one index at a time. 
