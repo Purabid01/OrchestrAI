@@ -114,7 +114,7 @@ here, start empty, stop also empty, step is -1 which tells python to step backwa
 
 
 ## Day 7 - [18-08-2026]
-**Branch:** 
+**Branch:** day-07/control-flow
 # WARMUP
 1. **Predictions before running:**
 print(bool(""))   ---> False  --> an empty string containing zero char is considered falsy
@@ -124,4 +124,10 @@ print(bool([0]))  ---> True --> a non-empty list(even if it's only item is 0) ev
 print(bool(None)) ---> False --> None represents the absence of a value and is always falsy. 
 
 
-
+## Day 8 - [24-08-2026]
+**Branch:** day-08/loops
+# WARMUP
+1. **Predictions before running:**
+for i in range(2, 10, 3):
+    print(i)
+--> It means: start at 2, stop before 10, step by 3. So: 2, then 2+3=5, then 5+3=8, then 8+3=11 which exceeds 10 so stop.It prints: 2, 5, 8.
