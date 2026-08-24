@@ -53,29 +53,25 @@ print(a + a)   ---> 55
 print(b + b)   ---> 6
 print(a * 3)   ---> 555  = = str repeatation creates "5" repeated 3 times
 print(b * 3)   ---> 9
-# qs:
-Why does a + a not give you 10?---> Because a is string var, in python using the (+) operator performs string concatenation(joining the text/string together) rather than numerical addition.
+# QS:
+1. Why does a + a not give you 10?---> Because a is string var, in python using the (+) operator performs string concatenation(joining the text/string together) rather than numerical addition.
 # type conversion
 c = int(a)
 print(c + b)
 print(type(c))
-# qs:
-What does int(a) do?
+2. What does int(a) do?
 --> it converts the string to int type
-# qs:
-What does c + b print?
+3. What does c + b print?
 --> 8
-# qs:
-What does type(c) print?
+4. What does type(c) print?
 --> <class 'int'>
-# qs: 
-print this --> print(a + b)
+5. print this --> print(a + b)
 what is the exact error name, and why does Python refuse to do this?
 --> Exact error = TypeError: can only concatenate str (not "int") to str
 because python blocks this because strings and integers are incompatible types, and python avoids guessing whether we want text concatenation ("53") or arithmetic addition(8)
 
 
-## Day 5 - [17-08-2026]
+## Day 5,6 - [17-08-2026]
 **Branch:** day-05/tip-calculator
 # Why do you need to convert input() before doing math?
 Because python input() function always returns a string(str). Even if the user types numbers to perform arithmetic, Python needs the value to be numerical type like int or float.
@@ -111,3 +107,14 @@ so, [1:4] pulls char at index 1, 2, 3 and giving us "ell".
 2. What does [::-1] actually mean?
 --> [start:stop:step]
 here, start empty, stop also empty, step is -1 which tells python to step backward thorugh the string one index at a time. 
+
+
+## Day 7 - [18-08-2026]
+**Branch:** 
+# WARMUP
+1. **Predictions before running:**
+print(bool(""))   ---> False  --> an empty string containing zero char is considered falsy
+print(bool("0"))  ---> True   --> any non empty evaluates to True, even if the text inside happens to be char "0"
+print(bool([]))   ---> False --> any empty list conatains no elements and is falsy
+print(bool([0]))  ---> True --> a non-empty list(even if it's only item is 0) evaluates to True
+print(bool(None)) ---> False --> None represents the absence of a value and is always falsy. 
