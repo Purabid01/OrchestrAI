@@ -131,3 +131,21 @@ print(bool(None)) ---> False --> None represents the absence of a value and is a
 for i in range(2, 10, 3):
     print(i)
 --> It means: start at 2, stop before 10, step by 3. So: 2, then 2+3=5, then 5+3=8, then 8+3=11 which exceeds 10 so stop.It prints: 2, 5, 8.
+
+
+
+# Day 9 - [24-08-2026]
+**Branch:** day-09/lists-and-tuples
+# WARMUP
+1. **Predictions before running:**
+a = [1, 2, 3]
+b = a
+b.append(4) ---> creating a second name that points to the same list in memory
+print(a) ---> [1, 2, 3, 4]
+--> . Both a and b point to the same object — so appending via b changes what a sees too.
+--> fix: make b an independent copy so appending to it doesn't affect a
+1. option A:  b = a.copy()
+2: option B: b = a[:]
+3. Option c: b = list(a)
+# Still Fuzzy
+list exercises crash on empty input — need try/except
