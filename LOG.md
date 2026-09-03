@@ -149,3 +149,26 @@ print(a) ---> [1, 2, 3, 4]
 3. Option c: b = list(a)
 # Still Fuzzy
 list exercises crash on empty input — need try/except
+
+
+
+# Day 10 - [26-08-2026]
+**Branch:** day-10/functions
+# WARMUP
+**Predictions before running:**
+def add_item(item, basket=[]):
+    basket.append(item)
+    return basket
+
+print(add_item("a"))   --> ['a'] ----> It appends a in basket list
+print(add_item("b"))   --> ['a', 'b']   ---> It appens b in basket list along with a
+Why does basket still contain "a" when you call add_item("b")?
+--> Because, default arguments in python are created only once when defined. So, calls resue the exact same list in memory. It uses the shared list.
+1. how do we make each call get its own fresh list?
+Use None as the default argument, and instantiate a new empty list  inside the function whenever None is passed.
+def add_item(item, basket=None):
+    if basket is None:
+        basket = []   # Creates a brand new list everytime
+    basket.appened(item)
+    return basket
+print(add_item("a"))   # output: ['a']
