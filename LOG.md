@@ -172,3 +172,23 @@ def add_item(item, basket=None):
     basket.appened(item)
     return basket
 print(add_item("a"))   # output: ['a']
+
+
+
+# Day 11 - [03-09-2026]
+**Branch:** day-11/errors-and-exceptions
+# WARMUP
+**Predictions before running:**
+1. what is the diff? Why is Option B better than Option A?
+# Option A
+try:
+    result = int(input("Enter number: "))
+except:
+    print("bad input")
+
+# Option B  
+try:
+    result = int(input("Enter number: "))
+except ValueError:
+    print("bad input")
+--> Option A uses a bare except that dangerously catches system signals like Ctrl+C and masks hidden bugs, whereas Option B specifically catches only ValueError for invalid inputs, making execution safe and easy to debug.Bare except swallows everything including KeyboardInterrupt and SystemExit — signals the OS sends that your program should never silently ignore. Always catch the specific exception you expect.
