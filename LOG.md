@@ -280,3 +280,24 @@ To retain all values without loss, map each inverted key to a list:
       inverted.setdefault(region, []).append(cloud)
 
   Result: {"us-east-1": ["aws", "azure"]}
+
+
+
+
+
+# Day 13 - [04-09-2026]
+**Branch:** day-12/files-and-json
+# WARMUP
+**Predictions before running:**
+with open("data.txt", "w") as f:
+    f.write("hello")
+1. What does "w" mode do if the file already exists?
+--> It overwrites (truncates) the file completely, erasing all existing content the moment the file is opened.
+2. What does with give you that a bare open() doesn't?
+--> with acts as a Context Manager that guarantees the file is automatically closed when the block finishes, even if an unhandled exception or crash occurs inside the block.
+It eliminates the need to manually call f.close().
+3. What happens to the file if your program crashes inside a bare open() without closing it?
+--> Data Loss / Unflushed Buffers: Python buffers file writes in memory for performance. If the script crashes before f.close() or f.flush() runs, pending data inside the buffer may never write to disk, leaving the file empty or incomplete.
+--> File Resource Locks: On operating systems like Windows, the file handle remains locked by the operating system until the process is completely terminated, preventing other applications or scripts from editing, renaming, or deleting it.
+5. what exception does json.load raise on broken JSON?
+--> json.load raises json.JSONDecodeError (which is a subclass of ValueError).
