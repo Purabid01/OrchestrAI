@@ -180,15 +180,103 @@ print(add_item("a"))   # output: ['a']
 # WARMUP
 **Predictions before running:**
 1. what is the diff? Why is Option B better than Option A?
-# Option A
+**Option A**
 try:
     result = int(input("Enter number: "))
 except:
     print("bad input")
 
-# Option B  
+**Option B**  
 try:
     result = int(input("Enter number: "))
 except ValueError:
     print("bad input")
 --> Option A uses a bare except that dangerously catches system signals like Ctrl+C and masks hidden bugs, whereas Option B specifically catches only ValueError for invalid inputs, making execution safe and easy to debug.Bare except swallows everything including KeyboardInterrupt and SystemExit — signals the OS sends that your program should never silently ignore. Always catch the specific exception you expect.
+
+
+
+
+# Day 12 - [03-09-2026]
+**Branch:** day-12/dictionaries
+# WARMUP
+**Predictions before running:**
+**1. What happens and why? Does it print, or does it crash?**
+counts = {}
+for c in ["aws", "aws", "gcp"]:
+    counts[c] += 1
+print(counts)
+--> it crashes. Iterating through a list and using those strings as dictionary keys is completely valid Python syntax.
+--> It crashes with a KeyError on the very first loop iteration (c = "aws") when executing counts[c] += 1.
+**--> Why It Crashes**
+The expression counts[c] += 1 is shorthand for:
+counts[c] = counts[c] + 1
+To compute counts["aws"] + 1, Python must first read the current value of counts["aws"]. But because counts is completely empty ({}), the key "aws" does not exist yet, raising a KeyError: 'aws'.
+**--> How to Fix It**
+To increment counts in a dictionary, you have three primary options:
+**Option 1: Initialize the key if missing (dict.get())**
+counts = {}
+for c in ["aws", "aws", "gcp"]:
+    counts[c] = counts.get(c, 0) + 1  # Falls back to 0 if key doesn't exist
+
+print(counts)  # Output: {'aws': 2, 'gcp': 1}
+**Option 2: Defensive if/else check**
+counts = {}
+for c in ["aws", "aws", "gcp"]:
+    if c not in counts:
+        counts[c] = 0
+    counts[c] += 1
+**Option 3: Use collections.defaultdict**
+from collections import defaultdict
+
+counts = defaultdict(int)  # Automatically defaults missing keys to 0
+for c in ["aws", "aws", "gcp"]:
+    counts[c] += 1
+--> counts.get(cloud, 0) + 1 looks up the key cloud to get its current count (returning 0 if the key doesn't exist yet) and adds 1 to it.
+**second way-->**
+The second way is using defaultdict from the collections module, which automatically initializes missing keys with a default value (like 0 for integers) whenever we access or modify them:
+from collections import defaultdict
+
+counts = defaultdict(int)  # Automatically defaults missing keys to 0
+
+for cloud in ["aws", "gcp", "aws"]:
+    counts[cloud] += 1  # No KeyError! Missing keys start at 0
+2. One question on your inversion code:
+python
+for cloud, region in original.items():
+    inverted[region] = cloud
+What happens if two clouds map to the same region? Which one wins and why? Write the answer in LOG.
+LOG: DICTIONARY INVERSION COLLISION ANALYSIS
+
+[INPUT DATASET]
+original = {
+    "aws": "us-east-1",
+    "azure": "us-east-1"  <-- Duplicate value collision on region key
+}
+
+[EXECUTION TRACE]
+- Pass 1: cloud="aws", region="us-east-1"
+  Execution: inverted["us-east-1"] = "aws"
+  State: inverted = {"us-east-1": "aws"}
+
+- Pass 2: cloud="azure", region="us-east-1"
+  Execution: inverted["us-east-1"] = "azure"
+  State: inverted = {"us-east-1": "azure"}
+
+[COLLISION RESULT]
+Winner: "azure" (The last processed key)
+
+[MECHANISM & CAUSE]
+1. Python dictionaries require every key to be strictly unique.
+2. Direct key assignment (`dict[key] = value`) performs an in-place update if 
+   the target key already exists.
+3. Therefore, subsequent iterations overwrite previous assignments, causing 
+   earlier keys ("aws") to be silently replaced by later ones ("azure").
+
+[DEFENSIVE RESOLUTION]
+To retain all values without loss, map each inverted key to a list:
+
+  inverted = {}
+  for cloud, region in original.items():
+      inverted.setdefault(region, []).append(cloud)
+
+  Result: {"us-east-1": ["aws", "azure"]}
