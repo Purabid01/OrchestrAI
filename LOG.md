@@ -285,7 +285,7 @@ To retain all values without loss, map each inverted key to a list:
 
 
 
-# Day 13 - [04-09-2026]
+# Day 12 - [03-09-2026]
 **Branch:** day-12/files-and-json
 # WARMUP
 **Predictions before running:**
@@ -301,3 +301,15 @@ It eliminates the need to manually call f.close().
 --> File Resource Locks: On operating systems like Windows, the file handle remains locked by the operating system until the process is completely terminated, preventing other applications or scripts from editing, renaming, or deleting it.
 5. what exception does json.load raise on broken JSON?
 --> json.load raises json.JSONDecodeError (which is a subclass of ValueError).
+
+
+
+
+# Day 14 - [06-09-2026]
+**Branch:** day-14/comprehensions
+# WARMUP
+**Predictions before running:**
+1. What does each line produce?
+print([x * 2 for x in range(3)])   ----> [0, 2, 4]  ---> multiplies each number in 0, 1, 2 by 2
+print({c: len(c) for c in ["aws", "gcp"]}) --->  {'aws': 3, 'gcp': 3}  --> creates a dictionary mapping each string to its length.
+print([x for x in range(10) if x % 2 == 0]) ---> [0, 2, 4, 6, 8]  --> filters numbers from 0 to 9, keeping only even numbers
