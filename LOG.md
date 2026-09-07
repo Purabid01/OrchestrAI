@@ -396,3 +396,34 @@ def process(cloud: str) -> dict:
 def process(cloud):
     ...
 ---> Type hints enable early bug detection via static analysis (mypy) and provide IDE auto-completion with self-documenting code.
+
+
+
+
+
+# Day 17 - [07-09-2026]
+**Branch:** day-17/type-hints
+# WARMUP
+**Predictions before running:**
+1. What happens when you run this? Does it print, or does it raise? What type of error?
+from pydantic import BaseModel
+from typing import Literal
+
+class Request(BaseModel):
+    cloud: Literal["aws", "azure", "gcp"]
+    size: str
+
+r = Request(cloud="oracle", size="large")
+print(r)
+
+**--> It raises a ValidationError from Pydantic. It does not print.**
+**--> what happens?** 
+Pydantic performs runtime data validation when initializing models. Because "oracle" is not one of the allowed literals specified in Literal["aws", "azure", "gcp"], Pydantic halts execution and raises a error.
+
+**--> Error Details**
+The exact exception raised is pydantic.ValidationError, containing details similar to this:
+**pydantic_core._pydantic_core.ValidationError: 1 validation error for Request**
+**cloud**
+  **Input should be 'aws', 'azure' or 'gcp' [type=literal_error, input_value='oracle', input_type=str]**
+**Key Takeaway**
+While pure Python ignores type hints at runt**ime and mypy only checks them prior to execution during static analysis, Pydantic actively enforces type hints at runtime. Passing an invalid value directly causes an instantiation failure.
