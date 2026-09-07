@@ -191,7 +191,7 @@ try:
     result = int(input("Enter number: "))
 except ValueError:
     print("bad input")
---> Option A uses a bare except that dangerously catches system signals like Ctrl+C and masks hidden bugs, whereas Option B specifically catches only ValueError for invalid inputs, making execution safe and easy to debug.Bare except swallows everything including KeyboardInterrupt and SystemExit — signals the OS sends that your program should never silently ignore. Always catch the specific exception you expect.
+--> Option A uses a bare except that dangerously catches system signals like Ctrl+C and masks hidden bugs, whereas Option B specifically catches only ValueError for invalid inputs, making execution safe and easy to debug.Bare except swallows everything including KeyboardInterrupt and SystemExit — signals the OS sends that our program should never silently ignore. Always catch the specific exception we expect.
 
 
 
@@ -212,7 +212,7 @@ The expression counts[c] += 1 is shorthand for:
 counts[c] = counts[c] + 1
 To compute counts["aws"] + 1, Python must first read the current value of counts["aws"]. But because counts is completely empty ({}), the key "aws" does not exist yet, raising a KeyError: 'aws'.
 **--> How to Fix It**
-To increment counts in a dictionary, you have three primary options:
+To increment counts in a dictionary, we have three primary options:
 **Option 1: Initialize the key if missing (dict.get())**
 counts = {}
 for c in ["aws", "aws", "gcp"]:
@@ -313,3 +313,72 @@ It eliminates the need to manually call f.close().
 print([x * 2 for x in range(3)])   ----> [0, 2, 4]  ---> multiplies each number in 0, 1, 2 by 2
 print({c: len(c) for c in ["aws", "gcp"]}) --->  {'aws': 3, 'gcp': 3}  --> creates a dictionary mapping each string to its length.
 print([x for x in range(10) if x % 2 == 0]) ---> [0, 2, 4, 6, 8]  --> filters numbers from 0 to 9, keeping only even numbers
+
+
+
+
+# Day 15 - [06-09-2026]
+**Branch:** day-15/comprehensions
+# WARMUP
+**Predictions before running:**
+1. What happens and why? What's the fix?
+class Box:
+    def __init__(self, size):
+        size = size
+
+b = Box("large")
+print(b.size)
+--> what happens??? --> It raises an AttributeError: 'Box' object has no attribute 'size'.
+--> why??? ---> Inside __init__, size = size creates a local variable named size and assigns the argument to itself. It never attaches size to the instance object (self). Once __init__ finishes executing, that local size variable is destroyed, leaving the Box instance b with no size attribute attached.
+--> Fix: Prefix size with self. so Python attaches it as an attribute to the instance:
+class Box:
+    def __init__(self, size):
+        self.size = size  # Fix: attach to 'self'
+
+b = Box("large")
+print(b.size)  # Output: large
+
+2. what does @dataclass auto-generate for you that you'd otherwise write manually?
+--> When we apply @dataclass, Python automatically writes standard boilerplate methods behind the scenes based on our type annotations.
+
+Here is what @dataclass auto-generates for us:
+
+__init__(): Generates the constructor, accepts arguments for every defined field, and assigns them to instance variables (self.field = field).
+
+__repr__(): Generates a clean, developer-friendly string representation (e.g., SandboxRequest(cloud='aws', resource='db', size='large', count=1)).
+
+__eq__(): Generates equality comparison logic. It compares objects attribute-by-attribute (obj1 == obj2) rather than comparing memory addresses.
+
+__ne__(): Generates "not equal" logic (obj1 != obj2).
+
+Optional Ordering Methods (order=True): Generates rich comparison methods (__lt__, __le__, __gt__, __ge__) so we can sort instances by their fields.
+
+Optional Immutability (frozen=True): Generates assignment blocks that block changes to attributes after instantiation (making instances hashable/read-only).
+
+Comparison: Manual Class vs. @dataclass
+Manual Class Boilerplate
+Python
+class SandboxRequest:
+    def __init__(self, cloud: str, resource: str, size: str):
+        self.cloud = cloud
+        self.resource = resource
+        self.size = size
+
+    def __repr__(self):
+        return f"SandboxRequest(cloud={self.cloud!r}, resource={self.resource!r}, size={self.size!r})"
+
+    def __eq__(self, other):
+        if not isinstance(other, SandboxRequest):
+            return False
+        return (self.cloud, self.resource, self.size) == (other.cloud, other.resource, other.size)
+Equivalent @dataclass
+Python
+from dataclasses import dataclass
+
+@dataclass
+class SandboxRequest:
+    cloud: str
+    resource: str
+    size: str
+Both versions behave identically, but the @dataclass eliminates around 80% of the repetitive setup code while maintaining static type safety.
+
