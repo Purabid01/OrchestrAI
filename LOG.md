@@ -382,3 +382,17 @@ class SandboxRequest:
     size: str
 Both versions behave identically, but the @dataclass eliminates around 80% of the repetitive setup code while maintaining static type safety.
 
+
+
+
+# Day 16 - [07-09-2026]
+**Branch:** day-16/type-hints
+# WARMUP
+**Predictions before running:**
+1. Both run identically at runtime. So why bother with the first form? Give two reasons.
+def process(cloud: str) -> dict:
+    ...
+
+def process(cloud):
+    ...
+---> Type hints enable early bug detection via static analysis (mypy) and provide IDE auto-completion with self-documenting code.
